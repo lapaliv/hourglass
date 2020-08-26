@@ -1,0 +1,10 @@
+{
+  "name": "@lapaliv/hourglass",
+  "version": "2.0.0",
+  "description": "The library for work with date and time",
+  "main": "index.js",
+  "repository": "git@github.com:lapaliv/hourglass.git",
+  "author": "Alex <lapaliv@gmail.com>",
+  "license": "MIT",
+  "private": false
+}
