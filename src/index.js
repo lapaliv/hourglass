@@ -1,5 +1,7 @@
 import {Hourglass} from 'src/Hourglass';
 
-import './extensions/DateExtension';
+require('./extensions/DateExtension');
+require('./extensions/TimeExtension');
+require('./extensions/PropertyExtension');
 
 export default Hourglass;

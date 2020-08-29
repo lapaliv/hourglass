@@ -1,28 +1,21 @@
 import {Hourglass} from 'src/Hourglass';
 
 const MIN_VALUE = 1;
-let day = MIN_VALUE;
 
 Hourglass.prototype = {
     ...Hourglass.prototype,
-    get day() {
-        return day;
-    },
-    set day(value) {
-        if (value >= MIN_VALUE && value <= this.daysInMonth) {
-            day = value;
-        } else {
-            day = 1;
-            this.add(value);
-        }
-
-        return this;
-    },
+    _day: MIN_VALUE,
     getDay() {
-        return this.day;
+        return this._day;
     },
     setDay(value) {
-        this.day = value;
+        if (value >= MIN_VALUE && value <= this.daysInMonth) {
+            this._day = value;
+        } else {
+            this._day = 1;
+            this.addDays(value);
+        }
+
         return this;
     },
     addDay(count = 1) {
@@ -32,12 +25,13 @@ Hourglass.prototype = {
         while (true) {
             const countDaysInMonth = this.daysInMonth;
 
-            if (countDaysInMonth < count) {
-                day += count;
+            if (count + this.day < countDaysInMonth) {
+                this.day += count;
                 break;
             } else {
                 count -= countDaysInMonth;
                 this.addMonth();
+                this.day = MIN_VALUE;
             }
         }
 

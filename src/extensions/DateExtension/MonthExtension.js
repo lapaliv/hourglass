@@ -3,30 +3,20 @@ import {addUnit} from 'src/utils/addUnit';
 
 const MIN_VALUE = 1;
 const MAX_VALUE = 12;
-let month = MIN_VALUE;
 
 Hourglass.prototype = {
     ...Hourglass.prototype,
-    get month() {
-        return month;
-    },
-    set month(value) {
-        if (value >= MIN_VALUE && value <= MAX_VALUE) {
-            month = value;
-        } else {
-            month = MIN_VALUE;
-            this.add(value);
-        }
-    },
-    get daysInMonth() {
-        const countDaysInMonths = [31, this.isLeap ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-        return countDaysInMonths[this.month - 1];
-    },
+    _month: MIN_VALUE,
     getMonth() {
-        return this.month;
+        return this._month;
     },
     setMonth(value) {
-        this.month = value;
+        if (value >= MIN_VALUE && value <= MAX_VALUE) {
+            this._month = value;
+        } else {
+            this._month = MIN_VALUE;
+            this.addMonths(value);
+        }
         return this;
     },
     addMonth(count = 1) {

@@ -3,28 +3,20 @@ import {addUnit} from 'src/utils/addUnit';
 
 const MIN_VALUE = 0;
 const MAX_VALUE = 9999;
-let year = MIN_VALUE;
 
 Hourglass.prototype = {
     ...Hourglass.prototype,
-    get year() {
-
+    _year: MIN_VALUE,
+    getYear() {
+        return this._year;
     },
-    set year(value) {
+    setYear(value) {
         if (value >= MIN_VALUE && value <= MAX_VALUE) {
-            year = value;
+            this._year = value;
         } else {
             throw new Error('Trying to overflow the year');
         }
-    },
-    get isLeap() {
-        // todo
-    },
-    getYear() {
-        return this.year;
-    },
-    setYear(value) {
-        this.year = value;
+
         return this;
     },
     addYear(count = 1) {
