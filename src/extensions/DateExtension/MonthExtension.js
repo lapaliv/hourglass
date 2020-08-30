@@ -15,7 +15,7 @@ Hourglass.prototype = {
             this._month = value;
         } else {
             this._month = MIN_MONTH;
-            this.addMonths(value);
+            this.addMonths(value - MIN_MONTH);
         }
         return this;
     },
