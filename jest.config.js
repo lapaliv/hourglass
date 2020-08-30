@@ -1,6 +1,7 @@
 module.exports = {
   moduleNameMapper: {
     '^@lapaliv/hourglass$': '<rootDir>/dist/hourglass.min.js',
+    '^src/(.*)$': '<rootDir>/src/$1',
   },
   moduleFileExtensions: ['js'],
   transform: {

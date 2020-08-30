@@ -1,20 +1,20 @@
 import {Hourglass} from 'src/Hourglass';
 import {addUnit} from 'src/utils/addUnit';
-
-const MIN_VALUE = 1;
-const MAX_VALUE = 12;
+import {MAX_MONTH, MIN_MONTH} from 'src/consts';
+import {MIN_DAY} from 'src/consts';
+import {countDaysInMonth} from 'src/utils/countDaysInMonth';
 
 Hourglass.prototype = {
     ...Hourglass.prototype,
-    _month: MIN_VALUE,
+    _month: MIN_MONTH,
     getMonth() {
         return this._month;
     },
     setMonth(value) {
-        if (value >= MIN_VALUE && value <= MAX_VALUE) {
+        if (value >= MIN_MONTH && value <= MAX_MONTH) {
             this._month = value;
         } else {
-            this._month = MIN_VALUE;
+            this._month = MIN_MONTH;
             this.addMonths(value);
         }
         return this;
@@ -23,7 +23,7 @@ Hourglass.prototype = {
         return this.addMonths(count);
     },
     addMonths(count = 1) {
-        return addUnit(this, 'month', count, MIN_VALUE, MAX_VALUE, (overflow) => {
+        return addUnit(this, 'month', count, MIN_MONTH, MAX_MONTH, (overflow) => {
             this.addYears(overflow);
         });
     },
@@ -32,5 +32,15 @@ Hourglass.prototype = {
     },
     subMonths(count = 1) {
         return this.addMonths(count * -1);
+    },
+    startOfMonth() {
+        return this.setDay(MIN_DAY).startOfDay();
+    },
+    endOfMonth() {
+        return this.setDay(this.daysInMonth)
+            .endOfDay();
+    },
+    getCountDaysInMonth() {
+        return countDaysInMonth(this.year, this.month);
     },
 };

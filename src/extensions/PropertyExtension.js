@@ -1,4 +1,5 @@
 import {Hourglass} from 'src/Hourglass';
+import {isLeapYear} from 'src/utils/isLeapYear';
 
 Hourglass.prototype = {
     ...Hourglass.prototype,
@@ -39,10 +40,21 @@ Hourglass.prototype = {
         this.setSecond(value);
     },
     get daysInMonth() {
-        const countDaysInMonths = [31, this.isLeapYear ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-        return countDaysInMonths[this.month - 1];
+        return this.getCountDaysInMonth();
+    },
+    get countDaysInMonth() {
+        return this.getCountDaysInMonth();
     },
     get isLeapYear() {
-        return this.year % 400 === 0 || (this.year % 100 !== 0 && this.year % 4 === 0);
+        return isLeapYear(this.year);
+    },
+    get dayOfYear() {
+        return this.getDayOfYear();
+    },
+    get daysInYear() {
+        return this.getCountDaysInYear();
+    },
+    get countDaysInYear() {
+        return this.getCountDaysInYear();
     },
 };

@@ -1,12 +1,10 @@
 import {Hourglass} from 'src/Hourglass';
 import {addUnit} from 'src/utils/addUnit';
-
-const MIN_VALUE = 0;
-const MAX_VALUE = 59;
+import {MAX_SECOND, MIN_SECOND} from 'src/consts';
 
 Hourglass.prototype = {
     ...Hourglass.prototype,
-    _second: MIN_VALUE,
+    _second: MIN_SECOND,
     getSecond() {
         return this._second;
     },
@@ -14,10 +12,10 @@ Hourglass.prototype = {
         return this.getSecond();
     },
     setSecond(value) {
-        if (value >= MIN_VALUE && value <= MAX_VALUE) {
+        if (value >= MIN_SECOND && value <= MAX_SECOND) {
             this._second = value;
         } else {
-            this._second = MIN_VALUE;
+            this._second = MIN_SECOND;
             this.addSeconds(value);
         }
         return this;
@@ -29,7 +27,7 @@ Hourglass.prototype = {
         return this.addSeconds(count);
     },
     addSeconds(count = 1) {
-        return addUnit(this, 'second', count, MIN_VALUE, MAX_VALUE, (overflow) => {
+        return addUnit(this, 'second', count, MIN_SECOND, MAX_SECOND, (overflow) => {
             this.addMinutes(overflow);
         });
     },
