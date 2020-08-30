@@ -2,19 +2,17 @@ import {Hourglass} from 'src/Hourglass';
 import {addUnit} from 'src/utils/addUnit';
 import {MAX_MONTH} from 'src/consts';
 import {MIN_MONTH} from 'src/consts';
+import {MAX_YEAR, MIN_YEAR} from 'src/consts';
 import {countDaysInYear} from 'src/utils/countDaysInYear';
-
-const MIN_VALUE = 0;
-const MAX_VALUE = 9999;
 
 Hourglass.prototype = {
     ...Hourglass.prototype,
-    _year: MIN_VALUE,
+    _year: MIN_YEAR,
     getYear() {
         return this._year;
     },
     setYear(value) {
-        if (value >= MIN_VALUE && value <= MAX_VALUE) {
+        if (value >= MIN_YEAR && value <= MAX_YEAR) {
             this._year = value;
         } else {
             throw new Error('Trying to overflow the year');
@@ -26,7 +24,7 @@ Hourglass.prototype = {
         return this.addYears(count);
     },
     addYears(count = 1) {
-        return addUnit(this, 'year', count, MIN_VALUE, MAX_VALUE, () => {
+        return addUnit(this, 'year', count, MIN_YEAR, MAX_YEAR, () => {
             throw new Error('Trying to overflow the year');
         });
     },

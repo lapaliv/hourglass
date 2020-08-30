@@ -1,3 +1,6 @@
+export const MIN_YEAR = 0;
+export const MAX_YEAR = 9999;
+
 export const MIN_MONTH = 1;
 export const MAX_MONTH = 12;
 
