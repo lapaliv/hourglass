@@ -13,6 +13,20 @@ export class Hourglass {
             .setDay(day);
     }
 
+    static create(year, month, day, hour, minute, second) {
+        return new Hourglass()
+            .setYear(year)
+            .setMonth(month)
+            .setDay(day)
+            .setHour(hour)
+            .setMinute(minute)
+            .setSecond(second);
+    }
+
+    static today() {
+        return Hourglass.createFromTime();
+    }
+
     constructor(date = 'now') {
         const now = new Date();
         this.setYear(now.getUTCFullYear())

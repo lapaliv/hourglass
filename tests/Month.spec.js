@@ -89,6 +89,42 @@ describe('month', () => {
         compareMonth(hourglass, 10);
         expect(hourglass.year).toBe(3001);
     });
+
+    it('startOfMonth', () => {
+        const hourglass = Hourglass.create(1001, 2, 3, 4, 5, 6);
+        expect(hourglass.year).toBe(1001);
+        compareMonth(hourglass, 2);
+        expect(hourglass.day).toBe(3);
+        expect(hourglass.hour).toBe(4);
+        expect(hourglass.minute).toBe(5);
+        expect(hourglass.second).toBe(6);
+
+        hourglass.startOfMonth();
+        expect(hourglass.year).toBe(1001);
+        compareMonth(hourglass, 2);
+        expect(hourglass.day).toBe(1);
+        expect(hourglass.hour).toBe(0);
+        expect(hourglass.minute).toBe(0);
+        expect(hourglass.second).toBe(0);
+    });
+
+    it('endOfMonth', () => {
+        const hourglass = Hourglass.create(2020, 2, 11, 12, 13, 14);
+        expect(hourglass.year).toBe(2020);
+        compareMonth(hourglass, 2);
+        expect(hourglass.day).toBe(11);
+        expect(hourglass.hour).toBe(12);
+        expect(hourglass.minute).toBe(13);
+        expect(hourglass.second).toBe(14);
+
+        hourglass.endOfMonth();
+        expect(hourglass.year).toBe(2020);
+        compareMonth(hourglass, 2);
+        expect(hourglass.day).toBe(29);
+        expect(hourglass.hour).toBe(23);
+        expect(hourglass.minute).toBe(59);
+        expect(hourglass.second).toBe(59);
+    });
 });
 
 function compareMonth(hourglass, expected) {

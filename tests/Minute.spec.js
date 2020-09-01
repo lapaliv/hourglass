@@ -104,6 +104,66 @@ describe('minute', () => {
         expect(hourglass.hour).toBe(2);
         compareDate(hourglass);
     });
+
+    describe('startOfMinute', () => {
+        it('12:13:14', () => {
+            const hourglass = Hourglass.createFromTime(12, 13, 14);
+            compareMinute(hourglass, 13);
+            expect(hourglass.second).toBe(14);
+            expect(hourglass.hour).toBe(12);
+            compareDate(hourglass);
+
+            hourglass.startOfMinute();
+            compareMinute(hourglass, 13);
+            expect(hourglass.second).toBe(0);
+            expect(hourglass.hour).toBe(12);
+            compareDate(hourglass);
+        });
+
+        it('06:00:00', () => {
+            const hourglass = Hourglass.createFromTime(6, 0, 0);
+            compareMinute(hourglass, 0);
+            expect(hourglass.second).toBe(0);
+            expect(hourglass.hour).toBe(6);
+            compareDate(hourglass);
+
+            hourglass.startOfMinute();
+            compareMinute(hourglass, 0);
+            expect(hourglass.second).toBe(0);
+            expect(hourglass.hour).toBe(6);
+            compareDate(hourglass);
+        });
+    });
+
+    describe('endOfMinute', () => {
+        it('12:13:14', () => {
+            const hourglass = Hourglass.createFromTime(12, 13, 14);
+            compareMinute(hourglass, 13);
+            expect(hourglass.second).toBe(14);
+            expect(hourglass.hour).toBe(12);
+            compareDate(hourglass);
+
+            hourglass.endOfMinute();
+            compareMinute(hourglass, 13);
+            expect(hourglass.second).toBe(59);
+            expect(hourglass.hour).toBe(12);
+            compareDate(hourglass);
+        });
+
+        it('06:00:59', () => {
+            const hourglass = Hourglass.createFromTime(6, 0, 59);
+            compareMinute(hourglass, 0);
+            expect(hourglass.second).toBe(59);
+            expect(hourglass.hour).toBe(6);
+            compareDate(hourglass);
+
+            hourglass.endOfMinute();
+            compareMinute(hourglass, 0);
+            expect(hourglass.second).toBe(59);
+            expect(hourglass.hour).toBe(6);
+            compareDate(hourglass);
+        });
+    });
 });
 
 function compareMinute(hourglass, expected) {

@@ -73,6 +73,42 @@ describe('year', () => {
         hourglass.subYears(-13);
         compareYear(hourglass, 3007);
     });
+
+    it('startOfYear', () => {
+        const hourglass = Hourglass.create(3000, 8, 9, 10, 11, 12);
+        compareYear(hourglass, 3000);
+        expect(hourglass.month).toBe(8);
+        expect(hourglass.day).toBe(9);
+        expect(hourglass.hour).toBe(10);
+        expect(hourglass.minute).toBe(11);
+        expect(hourglass.second).toBe(12);
+
+        hourglass.startOfYear();
+        compareYear(hourglass, 3000);
+        expect(hourglass.month).toBe(1);
+        expect(hourglass.day).toBe(1);
+        expect(hourglass.hour).toBe(0);
+        expect(hourglass.minute).toBe(0);
+        expect(hourglass.second).toBe(0);
+    });
+
+    it('endOfYear', () => {
+        const hourglass = Hourglass.create(2050, 9, 10, 11, 12, 13);
+        compareYear(hourglass, 2050);
+        expect(hourglass.month).toBe(9);
+        expect(hourglass.day).toBe(10);
+        expect(hourglass.hour).toBe(11);
+        expect(hourglass.minute).toBe(12);
+        expect(hourglass.second).toBe(13);
+
+        hourglass.endOfYear();
+        compareYear(hourglass, 2050);
+        expect(hourglass.month).toBe(12);
+        expect(hourglass.day).toBe(31);
+        expect(hourglass.hour).toBe(23);
+        expect(hourglass.minute).toBe(59);
+        expect(hourglass.second).toBe(59);
+    });
 });
 
 function compareYear(hourglass, expected) {
