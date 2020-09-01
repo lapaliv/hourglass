@@ -83,8 +83,9 @@ function compareHour(hourglass, expected) {
 
 function compareDate(hourglass, dayTerm = 0) {
     const now = new Date();
+    now.setDate(now.getUTCDate() + dayTerm);
 
-    expect(hourglass.day).toBe(now.getUTCDate() + dayTerm);
+    expect(hourglass.day).toBe(now.getUTCDate());
     expect(hourglass.month).toBe(now.getUTCMonth() + 1);
     expect(hourglass.year).toBe(now.getUTCFullYear());
 }
