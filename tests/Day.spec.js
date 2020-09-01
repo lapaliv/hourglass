@@ -165,6 +165,70 @@ describe('day', () => {
         expect(hourglass.minute).toBe(59);
         expect(hourglass.second).toBe(59);
     });
+
+    let dayOfYearNames = {
+        dayOfYear: 'property',
+        getDayOfYear: 'method',
+    };
+    for (let methodOrPropertyName in dayOfYearNames) {
+        describe(methodOrPropertyName, () => {
+            it('2020-01-01', () => {
+                const hourglass = Hourglass.createFromDate(2020, 1, 1);
+                if (dayOfYearNames[methodOrPropertyName] === 'method') {
+                    expect(hourglass[methodOrPropertyName]()).toBe(1);
+                } else {
+                    expect(hourglass[methodOrPropertyName]).toBe(1);
+                }
+            });
+            it('2020-05-23', () => {
+                const hourglass = Hourglass.createFromDate(2020, 5, 23);
+                if (dayOfYearNames[methodOrPropertyName] === 'method') {
+                    expect(hourglass[methodOrPropertyName]()).toBe(144);
+                } else {
+                    expect(hourglass[methodOrPropertyName]).toBe(144);
+                }
+            });
+            it('2001-09-30', () => {
+                const hourglass = Hourglass.createFromDate(2001, 9, 30);
+                if (dayOfYearNames[methodOrPropertyName] === 'method') {
+                    expect(hourglass[methodOrPropertyName]()).toBe(273);
+                } else {
+                    expect(hourglass[methodOrPropertyName]).toBe(273);
+                }
+            });
+        });
+    }
+
+    describe('setDayOfYear', () => {
+        it('273', () => {
+            const hourglass = Hourglass.createFromDate(2001);
+            hourglass.setDayOfYear(273);
+            expect(hourglass.year).toBe(2001);
+            expect(hourglass.month).toBe(9);
+            expect(hourglass.day).toBe(30);
+        });
+        it('144', () => {
+            const hourglass = Hourglass.createFromDate(2020);
+            hourglass.setDayOfYear(144);
+            expect(hourglass.year).toBe(2020);
+            expect(hourglass.month).toBe(5);
+            expect(hourglass.day).toBe(23);
+        });
+        it('1', () => {
+            const hourglass = Hourglass.createFromDate(2020);
+            hourglass.setDayOfYear(1);
+            expect(hourglass.year).toBe(2020);
+            expect(hourglass.month).toBe(1);
+            expect(hourglass.day).toBe(1);
+        });
+        it('0', () => {
+            const hourglass = Hourglass.createFromDate(2020);
+            hourglass.setDayOfYear(0);
+            expect(hourglass.year).toBe(2019);
+            expect(hourglass.month).toBe(12);
+            expect(hourglass.day).toBe(31);
+        });
+    });
 });
 
 function compareDay(hourglass, expected) {

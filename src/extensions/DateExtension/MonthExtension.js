@@ -40,6 +40,9 @@ Hourglass.prototype = {
         return this.setDay(this.daysInMonth)
             .endOfDay();
     },
+    getDaysInMonth() {
+        return this.getCountDaysInMonth();
+    },
     getCountDaysInMonth() {
         return countDaysInMonth(this.year, this.month);
     },

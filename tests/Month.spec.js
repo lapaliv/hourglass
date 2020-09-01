@@ -125,6 +125,50 @@ describe('month', () => {
         expect(hourglass.minute).toBe(59);
         expect(hourglass.second).toBe(59);
     });
+
+    let daysInMonthNames = {
+        daysInMonth: 'property',
+        countDaysInMonth: 'property',
+        getDaysInMonth: 'method',
+        getCountDaysInMonth: 'method',
+    };
+
+    for (const methodOrPropertyName in daysInMonthNames) {
+        describe(methodOrPropertyName, () => {
+            it('2020-02', () => {
+                const hourglass = Hourglass.createFromDate(2020, 2);
+                if (daysInMonthNames[methodOrPropertyName] === 'method') {
+                    expect(hourglass[methodOrPropertyName]()).toBe(29);
+                } else {
+                    expect(hourglass[methodOrPropertyName]).toBe(29);
+                }
+            });
+            it('2020-03', () => {
+                const hourglass = Hourglass.createFromDate(2020, 3);
+                if (daysInMonthNames[methodOrPropertyName] === 'method') {
+                    expect(hourglass[methodOrPropertyName]()).toBe(31);
+                } else {
+                    expect(hourglass[methodOrPropertyName]).toBe(31);
+                }
+            });
+            it('2020-04', () => {
+                const hourglass = Hourglass.createFromDate(2020, 4);
+                if (daysInMonthNames[methodOrPropertyName] === 'method') {
+                    expect(hourglass[methodOrPropertyName]()).toBe(30);
+                } else {
+                    expect(hourglass[methodOrPropertyName]).toBe(30);
+                }
+            });
+            it('2020-08', () => {
+                const hourglass = Hourglass.createFromDate(2020, 8);
+                if (daysInMonthNames[methodOrPropertyName] === 'method') {
+                    expect(hourglass[methodOrPropertyName]()).toBe(31);
+                } else {
+                    expect(hourglass[methodOrPropertyName]).toBe(31);
+                }
+            });
+        });
+    }
 });
 
 function compareMonth(hourglass, expected) {

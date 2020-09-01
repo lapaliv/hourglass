@@ -6,7 +6,7 @@ export class Hourglass {
             .setSecond(second);
     }
 
-    static createFromDate(year, month, day) {
+    static createFromDate(year, month = 1, day = 1) {
         return new Hourglass()
             .setYear(year)
             .setMonth(month)

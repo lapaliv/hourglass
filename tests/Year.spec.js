@@ -109,6 +109,49 @@ describe('year', () => {
         expect(hourglass.minute).toBe(59);
         expect(hourglass.second).toBe(59);
     });
+
+    describe('isLeapYear', () => {
+        it('2020', () => {
+            const hourglass = Hourglass.createFromDate(2020, 1, 1);
+            expect(hourglass.isLeapYear).toBe(true);
+        });
+        it('2019', () => {
+            const hourglass = Hourglass.createFromDate(2019, 1, 1);
+            expect(hourglass.isLeapYear).toBe(false);
+        });
+        it('2016', () => {
+            const hourglass = Hourglass.createFromDate(2016, 1, 1);
+            expect(hourglass.isLeapYear).toBe(true);
+        });
+    });
+
+    let daysInYearNames = {
+        getDaysInYear: 'method',
+        getCountDaysInYear: 'method',
+        daysInYear: 'property',
+        countDaysInYear: 'property',
+    };
+
+    for (const methodOrPropertyName in daysInYearNames) {
+        describe(methodOrPropertyName, () => {
+            it('2020', () => {
+                const hourglass = Hourglass.createFromDate(2020, 1, 1);
+                if (daysInYearNames[methodOrPropertyName] === 'method') {
+                    expect(hourglass[methodOrPropertyName]()).toBe(366);
+                } else {
+                    expect(hourglass[methodOrPropertyName]).toBe(366);
+                }
+            });
+            it('2019', () => {
+                const hourglass = Hourglass.createFromDate(2019, 1, 1);
+                if (daysInYearNames[methodOrPropertyName] === 'method') {
+                    expect(hourglass[methodOrPropertyName]()).toBe(365);
+                } else {
+                    expect(hourglass[methodOrPropertyName]).toBe(365);
+                }
+            });
+        });
+    }
 });
 
 function compareYear(hourglass, expected) {

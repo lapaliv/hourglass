@@ -3,7 +3,6 @@ import {MAX_HOUR} from 'src/consts';
 import {MIN_HOUR} from 'src/consts';
 import {MIN_MONTH} from 'src/consts';
 import {countDaysInMonth} from 'src/utils/countDaysInMonth';
-import {countDaysInYear} from 'src/utils/countDaysInYear';
 
 const MIN_VALUE = 1;
 
@@ -54,42 +53,6 @@ Hourglass.prototype = {
         return sum + this.day;
     },
     setDayOfYear(value) {
-        this.startOfYear();
-        let coefficient = value < 0 ? -1 : 1;
-        const firstValue = value;
-
-        // Определяем количество лет, которое необходимо вычесть/добавить
-        let finishYear = this.year;
-        for (; ;) {
-            const countDaysInCurrentYear = countDaysInYear(finishYear);
-            if (Math.abs(value) >= countDaysInCurrentYear) {
-                finishYear += coefficient;
-                value -= countDaysInCurrentYear;
-            } else if (value < 0) {
-                finishYear--;
-                value += countDaysInCurrentYear - 1;
-                coefficient = 1;
-            } else {
-                break;
-            }
-        }
-
-        // Определяем кол-во месяцев, которое необходимо вычесть/добавить
-        let finishMonth = this.month;
-        for (; ;) {
-            const countDaysInCurrentMonth = countDaysInMonth(finishYear, finishMonth);
-            if (Math.abs(value) > countDaysInCurrentMonth) {
-                finishMonth += coefficient;
-                value -= countDaysInCurrentMonth;
-            } else {
-                break;
-            }
-        }
-
-        this.setYear(finishYear)
-            .setMonth(finishMonth)
-            .setDay(value);
-
-        return this;
+        return this.startOfYear().setDay(value);
     },
 };
