@@ -10,7 +10,10 @@ export class Hourglass {
         return new Hourglass()
             .setYear(year)
             .setMonth(month)
-            .setDay(day);
+            .setDay(day)
+            .setHour(0)
+            .setMinute(0)
+            .setSecond(0);
     }
 
     static create(year, month, day, hour, minute, second) {
@@ -23,8 +26,25 @@ export class Hourglass {
             .setSecond(second);
     }
 
+    static createFromDateObject(date) {
+        return new Hourglass()
+            .setYear(date.getFullYear())
+            .setMonth(date.getMonth() + 1)
+            .setDay(date.getDate())
+            .setHour(date.getHours())
+            .setMinute(date.getMinutes())
+            .setSecond(date.getSeconds());
+    }
+
     static today() {
         return Hourglass.createFromTime();
+    }
+
+    static parse(date) {
+        if (date instanceof Hourglass) {
+            return date;
+        }
+        return Hourglass.createFromDateObject(new Date(date));
     }
 
     constructor(date = 'now') {

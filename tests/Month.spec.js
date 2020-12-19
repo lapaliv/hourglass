@@ -169,6 +169,33 @@ describe('month', () => {
             });
         });
     }
+
+    describe('diffInMonths', () => {
+        it('from 2008-12 to 2030-05', () => {
+            const startHourglass = Hourglass.createFromDate(2008, 12);
+            const endHourglass = Hourglass.createFromDate(2030, 5);
+
+            expect(startHourglass.diffInMonths(endHourglass)).toBe(257);
+        });
+        it('from 2008-12-02 to 2030-05-01', () => {
+            const startHourglass = Hourglass.createFromDate(2008, 12, 2);
+            const endHourglass = Hourglass.createFromDate(2030, 5);
+
+            expect(startHourglass.diffInMonths(endHourglass)).toBe(256);
+        });
+        it('from 2003-06 to 1999-03', () => {
+            const startHourglass = Hourglass.createFromDate(2003, 6, 18);
+            const endHourglass = Hourglass.createFromDate(1999, 3, 30);
+
+            expect(startHourglass.diffInMonths(endHourglass)).toBe(50);
+        });
+        it('from 2005-11 to 2000-11', () => {
+            const startHourglass = Hourglass.createFromDate(2005, 11, 11);
+            const endHourglass = Hourglass.createFromDate(2000, 11, 11);
+
+            expect(startHourglass.diffInMonths(endHourglass)).toBe(60);
+        });
+    });
 });
 
 function compareMonth(hourglass, expected) {

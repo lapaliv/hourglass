@@ -1,8 +1,6 @@
 import {Hourglass} from 'src/Hourglass';
 import {addUnit} from 'src/utils/addUnit';
-import {MAX_MONTH} from 'src/consts';
-import {MIN_MONTH} from 'src/consts';
-import {MAX_YEAR, MIN_YEAR} from 'src/consts';
+import {MAX_YEAR, MIN_YEAR, MAX_MONTH, MIN_MONTH} from 'src/consts';
 import {countDaysInYear} from 'src/utils/countDaysInYear';
 
 Hourglass.prototype = {
@@ -46,5 +44,29 @@ Hourglass.prototype = {
     },
     getCountDaysInYear() {
         return countDaysInYear(this.year);
+    },
+    diffInYears(date) {
+        const hourglass = Hourglass.parse(date);
+        const diff = Math.abs(this.getYear() - hourglass.getYear());
+        const fieldsForCompare = ['month', 'day', 'hour', 'minute', 'second'];
+
+        let greaterDate = null;
+        let lesserDate = null;
+
+        if (this.gte(hourglass)) {
+            greaterDate = this;
+            lesserDate = hourglass;
+        } else {
+            greaterDate = hourglass;
+            lesserDate = this;
+        }
+
+        for (const field of fieldsForCompare) {
+            if (greaterDate[field] < lesserDate[field]) {
+                return diff - 1;
+            }
+        }
+
+        return diff;
     },
 };

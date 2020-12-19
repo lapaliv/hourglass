@@ -152,6 +152,35 @@ describe('year', () => {
             });
         });
     }
+
+    describe('diffInYears', () => {
+        it('1900-2000', () => {
+            const start = Hourglass.createFromDate(1900);
+            const end = Hourglass.createFromDate(2000);
+
+            console.log(start, end);
+
+            expect(start.diffInYears(end)).toBe(100);
+        });
+        it('1234-678', () => {
+            const start = Hourglass.createFromDate(1234);
+            const end = Hourglass.createFromDate(678);
+
+            expect(start.diffInYears(end)).toBe(556);
+        });
+        it('2008-2030', () => {
+            const start = Hourglass.createFromDate(2008, 11, 1);
+            const end = new Date(2030, 4, 1, 0, 0, 0);
+
+            expect(start.diffInYears(end)).toBe(21);
+        });
+        it('2008-2030', () => {
+            const start = Hourglass.createFromDate(2008);
+            const end = new Date(2030, 0, 1, 0, 0, 0);
+
+            expect(start.diffInYears(end)).toBe(22);
+        });
+    });
 });
 
 function compareYear(hourglass, expected) {

@@ -1,4 +1,5 @@
 import {Hourglass} from 'src/Hourglass';
+import {startFromZero} from 'src/utils/startFromZero';
 
 Hourglass.prototype = {
     ...Hourglass.prototype,
@@ -42,4 +43,24 @@ Hourglass.prototype = {
             .setMinute(date.getUTCMinutes())
             .setSecond(date.getUTCSeconds());
     },
+
+    toTimestamp() {
+        return Math.floor(this.toDate().getTime() / 1000);
+    },
+
+    toDateTimeString() {
+        let date = [
+            this.getYear(),
+            startFromZero(this.getMonth()),
+            startFromZero(this.getDay()),
+        ];
+        let time = [
+            startFromZero(this.getHour()),
+            startFromZero(this.getMinute()),
+            startFromZero(this.getSecond()),
+        ];
+
+
+        return date.join('-') + ' ' + time.join(':');
+    }
 };

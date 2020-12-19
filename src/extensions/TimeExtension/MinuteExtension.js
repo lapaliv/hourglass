@@ -47,4 +47,12 @@ Hourglass.prototype = {
         this.setSecond(MAX_SECOND);
         return this;
     },
+    diffInMinutes(date) {
+        return Math.floor(Hourglass.parse(date).diffInSeconds(this) / 60);
+    },
+
+    _gteMinuteForDiff(h1, h2) {
+        return h1.getMinutes() >= h2.getMinutes()
+            && this._gteSecondForDiff(h1, h2);
+    },
 };

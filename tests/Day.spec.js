@@ -229,6 +229,24 @@ describe('day', () => {
             expect(hourglass.day).toBe(31);
         });
     });
+
+    describe('diffInDays', () => {
+        it('from 2000-01-01 to 2001-03-02', () => {
+            const startHourglass = Hourglass.createFromDate(2000, 1, 1);
+            const endHourglass = Hourglass.createFromDate(2000, 3, 2);
+
+            expect(startHourglass.diffInDays(endHourglass)).toBe(61);
+        });
+        it('from 0678-05-10 to 3000-02-15', () => {
+            const startHourglass = Hourglass.createFromDate(678, 5, 10);
+            const endHourglass = Hourglass.createFromDate(3000, 2, 15);
+
+            // 73267977600 - надо
+            // 73267545600
+            console.log('seconds', startHourglass.diffInSeconds(endHourglass));
+            expect(startHourglass.diffInDays(endHourglass)).toBe(848009);
+        });
+    });
 });
 
 function compareDay(hourglass, expected) {

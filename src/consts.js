@@ -14,3 +14,5 @@ export const MAX_MINUTE = 59;
 
 export const MIN_SECOND = 0;
 export const MAX_SECOND = 59;
+
+export const FIELDS_FOR_COMPARE = ['year', 'month', 'day', 'hour', 'minute', 'second'];

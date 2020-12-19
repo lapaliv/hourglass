@@ -1,6 +1,7 @@
 import {Hourglass} from 'src/Hourglass';
 import {addUnit} from 'src/utils/addUnit';
 import {MAX_SECOND, MIN_SECOND} from 'src/consts';
+import {countSeconds} from 'src/utils/countSeconds';
 
 Hourglass.prototype = {
     ...Hourglass.prototype,
@@ -36,5 +37,9 @@ Hourglass.prototype = {
     },
     subSeconds(count = 1) {
         return this.addSeconds(count * -1);
+    },
+    diffInSeconds(date) {
+        const hourglass = Hourglass.parse(date);
+        return Math.abs(countSeconds(this) - countSeconds(hourglass));
     },
 };
